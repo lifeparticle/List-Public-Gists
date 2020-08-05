@@ -17,10 +17,10 @@ Handler = Proc.new do |req, res|
 				markdown.push("[#{parsed["files"].first[0]}](#{parsed["url"]})")
 			end
 		end
-		res.body = markdown.join("\n")
-		puts "#{res.body}"
+		#res.body = markdown.join("\n")
+		puts "#{markdown.join("\n")}"
 	rescue Exception => e
 		puts "#{"something bad happened"} #{e}"
 	end
-	res.body = "test"
+	res.body = "Current Time: #{Time.new}"
 end
