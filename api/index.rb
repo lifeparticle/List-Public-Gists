@@ -8,18 +8,16 @@ Handler = Proc.new do |req, res|
 	begin
 		gist_ids.each do |gist_id|
 			url = URI.parse(URI.escape(("#{BASE_URL}#{gist_id}")))
-			res = Net::HTTP.get_response(url)
-			if res.is_a?(Net::HTTPSuccess)
-				parsed = JSON.parse(res.body)
+			result = Net::HTTP.get_response(url)
+			if result.is_a?(Net::HTTPSuccess)
+				parsed = JSON.parse(result.body)
 				markdown.push("[#{parsed["files"].first[0]}](#{parsed["url"]})")
 			end
 		end
-		#res.body = markdown.join("\n")
-		puts "#{markdown.join("\n")}"
 	rescue Exception => e
 		puts "#{"something bad happened"} #{e}"
 	end
 	res.status = 200
 	res['Content-Type'] = 'text/text; charset=utf-8'
-	res.body = "Current Time: #{Time.new}"
+	res.body = markdown.join("\n")
 end
