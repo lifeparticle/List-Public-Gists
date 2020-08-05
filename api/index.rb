@@ -18,7 +18,9 @@ Handler = Proc.new do |req, res|
 			end
 		end
 		res.body = markdown.join("\n")
+		puts "#{res.body}"
 	rescue Exception => e
 		puts "#{"something bad happened"} #{e}"
 	end
+	res.body = "test"
 end
