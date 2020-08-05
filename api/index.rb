@@ -21,4 +21,6 @@ Handler = Proc.new do |req, res|
 	rescue Exception => e
 		puts "#{"something bad happened"} #{e}"
 	end
+
+	res.body = "Current Time: #{Time.new}"
 end
